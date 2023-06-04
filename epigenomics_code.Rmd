@@ -1,0 +1,298 @@
+---
+title: "Epigenomics Project R code"
+author: "Paola Maragno - Carlo Manenti"
+date: "2023-02-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+#EPIGENOMICS PROJECT (R - CODE)
+
+
+
+## Getting started 
+We need to set the working directory
+```{r}
+setwd("~/Downloads/data&analysis")
+```
+
+
+
+## PEAKs BOX PLOTs 
+write somenthing funny
+
+
+
+### rep 1 - encode (peak overlap)
+```{r}
+rep1_encode_p <- as.data.frame(read.table("commonpeaks_rep1_encode.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+rep1_nonen_p <- as.data.frame(read.table("peaks_rep1_nonin_enc.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+
+boxplot(10^-rep1_encode_p$V9, 10^-rep1_nonen_p$V9,ylim=c(0,10^-5),names = c('overlapping with ENCODE','non overlapping with ENCODE'),       
+        ylab ='q_value',main='q_value of peaks of replicate 1 overlapping or not with ENCODE peaks - overlap')
+
+```
+
+
+
+### rep 2 - encode (peak overlap)
+```{r}
+rep2_encode_p <- as.data.frame(read.table("commonpeaks_rep2_encode.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+rep2_nonen_p <- as.data.frame(read.table("peaks_rep2_nonin_enc.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+
+boxplot(10^-rep2_encode_p$V9, 10^-rep2_nonen_p$V9,ylim=c(0,10^-5),names = c('overlapping with ENCODE','non overlapping with ENCODE'),       
+        ylab ='q_value',main='q_value of peaks of replicate 2 overlapping or not with ENCODE peaks - overlap')
+```
+
+
+
+### common rep 1-2 - encode (peak overlap) 
+#DOES NOT WORK AS INTENEDED
+```{r}
+com_rep_encode_p <- as.data.frame(read.table("commonpeaks_encode.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+com_rep_nonencode_p <- as.data.frame(read.table("rep_commonpeaks_nonin_encode.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+
+boxplot(10^-com_rep_encode_p$V5, 10^-com_rep_nonencode_p$V5,ylim=c(0,10^-7.5),names = c('overlapping with ENCODE','non overlapping with ENCODE'),       
+        ylab ='q_value',main='q_value of common peaks between replicate 1-2 overlapping or not with ENCODE peaks - overlap')
+
+```
+
+
+
+### merged - encode (peak overlap)
+```{r}
+merg_encode_p <- as.data.frame(read.table("mergedpeaks_encode.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+merg_nonencode_p <- as.data.frame(read.table("peaks_merged_nonin_encode.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+
+boxplot(10^-merg_encode_p$V9, 10^-merg_nonencode_p$V9,ylim=c(0,10^-5),names = c('overlapping with ENCODE','non overlapping with ENCODE'),       
+        ylab ='q_value',main='q_value of peaks from merged replicates overlapping or not with ENCODE peaks - overlap')
+```
+
+
+
+## SUMMITs BOX PLOTs
+something SillY
+
+
+
+### rep 1 - encode (summit proximity)
+```{r}
+rep1_encode_s <- as.data.frame(read.table("summit_rep1_in_encode.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+rep1_nonen_s <- as.data.frame(read.table("summit_rep1_nonin_enc.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+
+boxplot(10^-rep1_encode_s$V5, 10^-rep1_nonen_s$V5,ylim=c(0,10^-5),names = c('overlapping with ENCODE','non overlapping with ENCODE'),       
+        ylab ='p_value',main='p_value of peaks of replicate 1 overlapping or not with ENCODE peaks - summit proximity')
+```
+
+
+
+### rep 2 - encode (summit proximity)
+```{r}
+rep2_encode_s <- as.data.frame(read.table("summit_rep2_in_encode.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+rep2_nonen_s <- as.data.frame(read.table("summit_rep2_nonin_enc.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+
+boxplot(10^-rep2_encode_s$V5, 10^-rep2_nonen_s$V5,ylim=c(0,10^-5),names = c('overlapping with ENCODE','non overlapping with ENCODE'),       
+        ylab ='p_value',main='p_value of peaks of replicate 2 overlapping or not with ENCODE peaks - summit proximity')
+```
+
+
+
+### common rep 1-2 - encode (summit proximity)
+```{r}
+com_rep_encode_s <- as.data.frame(read.table("commonsummit_in_encode.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+com_rep_nonencode_s <- as.data.frame(read.table("rep_commonsummit_nonin_encode.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+
+boxplot(10^-com_rep_encode_s$V5, 10^-com_rep_nonencode_s$V5,ylim=c(0,10^-6.5),names = c('overlapping with ENCODE','non overlapping with ENCODE'),       
+        ylab ='p_value',main='p_value of common peaks between replicate 1-2 overlapping or not with ENCODE peaks - summit proximity')
+```
+
+
+
+### merged - encode (summit proximity)
+```{r}
+merg_encode_s <- as.data.frame(read.table("summit_merged_in_encode.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+merg_nonencode_s <- as.data.frame(read.table("summit_merged_nonin_encode.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+
+boxplot(10^-merg_encode_s$V5, 10^-merg_nonencode_s$V5,ylim=c(0,10^-5),names = c('overlapping with ENCODE','non overlapping with ENCODE'),       
+        ylab ='p_value',main='p_value of peaks from merged replicates overlapping or not with ENCODE peaks - summit proximity')
+```
+
+
+
+## CHROMATIN STATEs
+...
+
+
+retrieve the coordinates of the chromatin states each one with the number of summits falling in it
+```{r}
+chromatin <- as.data.frame(read.table("summits_per_chromatin_state.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+```
+
+# retrieve the coordinates of the summits
+```{r}
+summits <- as.data.frame(read.table("chr_state_each_summit.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+
+# initialize a data frame in which saving the number of summits falling in each chromatin state
+chr_states <- data.frame()
+
+# list of the 18 chromatin states
+chr_states_names <- c('1_TssA','2_TssFlnk','3_TssFlnkU','4_TssFlnkD','5_Tx','6_TxWk','7_EnhG1',
+                      '8_EnhG2','9_EnhA1','10_EnhA2','11_EnhWk','12_ZNF/Rpts','13_Het','14_TssBiv',
+                      '15_EnhBiv','16_ReprPC','17_ReprPCWk','18_Quies')
+ 
+for (state in chr_states_names) {
+  state_table <- chromatin[which(chromatin$V4 == state),]
+  total_summits <- sum(state_table$V10)
+  chr_states <- rbind(chr_states, c(state,total_summits))
+}
+colnames(chr_states) <- c('Chromatin_state','Overlapping_summits')
+
+# compute the number of summits not falling in any of the reported chromatin state and add this information to the data frame
+summits_not_overlapping <- nrow(summits) - sum(as.numeric(chr_states$Overlapping_summits))
+chr_states <- rbind(chr_states,c('other states',summits_not_overlapping))
+chr_states$overlapping_summits<-as.numeric(chr_states$Overlapping_summits)
+
+# plotting the informations
+library(ggplot2)
+
+chr_states$Chromatin_state <- factor(chr_states$Chromatin_state, levels = chr_states$Chromatin_state)
+ggplot(chr_states,aes(x = Chromatin_state, y=overlapping_summits))+ 
+  geom_bar(stat="identity")+ 
+  theme_classic() +
+  ylim(0,max(chr_states$overlapping_summits)+10)+
+  labs(title='Number of summits falling within each chromatin state')
+
+```
+
+## GREAT 
+...
+
+
+
+### ALL GENES
+```{r}
+target_genes <- as.data.frame(read.table("target_genes.txt",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+nrow(target_genes)
+# number of regulated genes: 3282
+
+library(stringr)
+t <- str_extract_all(target_genes$V2, "\\w+")
+ 
+r1 <- vapply(t,
+       FUN=function(x){x[2]},
+       FUN.VALUE=character(1)
+)
+r2 <- vapply(t,
+             FUN=function(x){x[4]},
+             FUN.VALUE=character(1)
+)
+
+r2 <- r2[!is.na(r2)]
+tot <- as.numeric(c(r1,r2))
+length(tot[tot <= 1000])
+# 472 GATA2 binds the promoter
+
+length(tot[tot > 1000])
+# 3400 GATA2 bind s distal regulatory region
+
+'GATA2' %in% target_genes$V1
+# GATA2 regulates itself 
+```
+
+
+
+### TOP 5K GENES
+```{r}
+target_genes_5000 <- as.data.frame(read.table("target_genes5000.txt",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+nrow(target_genes_5000)
+# number of regulated genes: 2627
+
+library(stringr)
+t <- str_extract_all(target_genes_5000$V2, "\\w+")
+
+r1 <- vapply(t,
+             FUN=function(x){x[2]},
+             FUN.VALUE=character(1)
+)
+r2 <- vapply(t,
+             FUN=function(x){x[4]},
+             FUN.VALUE=character(1)
+)
+
+r2 <- r2[!is.na(r2)]
+tot <- as.numeric(c(r1,r2))
+length(tot[tot <= 1000])
+# 348 GATA2 binds the promoter
+
+length(tot[tot > 1000])
+# 2680 GATA2 bind s distal regulatory region
+
+'GATA2' %in% target_genes_5000$V1
+# Same as before
+```
+
+
+
+##DNAse-seq 
+...
+
+
+
+```{r}
+ov <- 77.757
+nnov <- 100 - ov
+nnov
+
+library(RColorBrewer)
+myPalette <- brewer.pal(3, "Set2") 
+labels <- c('overlapping - 77.757%','non overlapping - 22.243%')
+pie(c(ov,nnov),labels,col=myPalette,border='white',main = 'Percentage of GATA2 summits overlapping with 
+    DNAse-seq regions')
+```
+
+# a quick try to define the chromatin states of summits non overlapping with DNase
+```{r}
+summits <- as.data.frame(read.table("chr_state_each_summit_non_in_DNAse.bed",header = FALSE, sep="\t",stringsAsFactors=FALSE))
+
+# list of the 18 chromatin states
+chr_states_names <- c('1_TssA','2_TssFlnk','3_TssFlnkU','4_TssFlnkD','5_Tx','6_TxWk','7_EnhG1',
+                      '8_EnhG2','9_EnhA1','10_EnhA2','11_EnhWk','12_ZNF/Rpts','13_Het','14_TssBiv',
+                      '15_EnhBiv','16_ReprPC','17_ReprPCWk','18_Quies')
+
+# initialize a data frame in which saving the number of summits falling in each chromatin state
+chr_states <- data.frame()
+ 
+for (state in chr_states_names) {
+  state_n <- nrow(summits[which(summits$V9 == state),])
+  chr_states <- rbind(chr_states, c(state, state_n))
+}
+colnames(chr_states) <- c('Chromatin_state', 'Overlapping_summits')
+
+chr_states$Overlapping_summits <- as.numeric(chr_states$Overlapping_summits)
+#rownames(chr_states) <- chr_states_names
+
+# compute the number of summits not falling in any of the reported chromatin state and add this information to the data frame
+summits_not_overlapping <- nrow(summits) - sum(chr_states$Overlapping_summits)
+chr_states <- rbind(chr_states, c('other states', summits_not_overlapping))
+
+chr_states$Overlapping_summits <- as.numeric(chr_states$Overlapping_summits)
+
+# plotting the informations
+library(ggplot2)
+
+chr_states$Chromatin_state <- factor(chr_states$Chromatin_state, levels = chr_states$Chromatin_state)
+
+ggplot(chr_states,aes(x = Chromatin_state, y=Overlapping_summits))+ 
+  geom_bar(stat="identity")+ 
+  theme_classic() +
+  ylim(0,max(chr_states$Overlapping_summits)+10)+
+  labs(title='Number of summits falling within each chromatin state')
+
+```
+
+
